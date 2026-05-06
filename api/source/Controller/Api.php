@@ -10,7 +10,7 @@ class Api
         echo "Olá, mundo! Estamos com a API funcionando, graças a Deus!";
     }
 
-    protected function call (int $code, ?string $status = null, ?string $message = null, ?string $type = null): \Source\WebService\Api
+    protected function call (int $code, ?string $status = null, ?string $message = null, ?string $type = null): Api
     {
         if(!empty($status)){
             $this->response = [
