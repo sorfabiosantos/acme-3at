@@ -1,0 +1,183 @@
+{
+  "code": 200,
+  "type": "success",
+  "status": "success",
+  "message": "Lista de produtos",
+  "data": [
+    {
+      "id": 1,
+      "category_id": 1,
+      "name": "Mouse Logitech M170",
+      "price": "89.90",
+      "category_name": "Periféricos"
+    },
+    {
+      "id": 2,
+      "category_id": 1,
+      "name": "Teclado Logitech K120",
+      "price": "79.90",
+      "category_name": "Periféricos"
+    },
+    {
+      "id": 3,
+      "category_id": 1,
+      "name": "Monitor LG 24 Polegadas IPS Full HD",
+      "price": "899.00",
+      "category_name": "Periféricos"
+    },
+    {
+      "id": 4,
+      "category_id": 2,
+      "name": "Notebook Dell Inspiron 15 i5 16GB 512GB SSD",
+      "price": "4299.00",
+      "category_name": "Notebooks"
+    },
+    {
+      "id": 5,
+      "category_id": 2,
+      "name": "Notebook Lenovo IdeaPad 3 Ryzen 5 8GB 256GB SSD",
+      "price": "3199.00",
+      "category_name": "Notebooks"
+    },
+    {
+      "id": 6,
+      "category_id": 2,
+      "name": "MacBook Air M2 13 Polegadas 256GB",
+      "price": "7999.00",
+      "category_name": "Notebooks"
+    },
+    {
+      "id": 7,
+      "category_id": 3,
+      "name": "Smartphone Samsung Galaxy A55 128GB",
+      "price": "2199.00",
+      "category_name": "Smartphones"
+    },
+    {
+      "id": 8,
+      "category_id": 3,
+      "name": "iPhone 15 128GB",
+      "price": "5999.00",
+      "category_name": "Smartphones"
+    },
+    {
+      "id": 9,
+      "category_id": 3,
+      "name": "Smartphone Motorola Edge 50 Fusion 256GB",
+      "price": "2499.00",
+      "category_name": "Smartphones"
+    },
+    {
+      "id": 10,
+      "category_id": 4,
+      "name": "Headset HyperX Cloud Stinger 2",
+      "price": "329.90",
+      "category_name": "Áudio e Vídeo"
+    },
+    {
+      "id": 11,
+      "category_id": 4,
+      "name": "Webcam Logitech C920s Full HD",
+      "price": "449.90",
+      "category_name": "Áudio e Vídeo"
+    },
+    {
+      "id": 12,
+      "category_id": 4,
+      "name": "Caixa de Som JBL Go 4 Bluetooth",
+      "price": "279.90",
+      "category_name": "Áudio e Vídeo"
+    },
+    {
+      "id": 13,
+      "category_id": 5,
+      "name": "SSD Kingston NV2 1TB NVMe",
+      "price": "399.90",
+      "category_name": "Armazenamento"
+    },
+    {
+      "id": 14,
+      "category_id": 5,
+      "name": "HD Externo Seagate 2TB USB 3.0",
+      "price": "499.90",
+      "category_name": "Armazenamento"
+    },
+    {
+      "id": 15,
+      "category_id": 5,
+      "name": "Pen Drive Sandisk Ultra 128GB USB 3.0",
+      "price": "89.90",
+      "category_name": "Armazenamento"
+    },
+    {
+      "id": 16,
+      "category_id": 6,
+      "name": "Roteador TP-Link Archer AX53 Wi-Fi 6",
+      "price": "449.90",
+      "category_name": "Redes"
+    },
+    {
+      "id": 17,
+      "category_id": 6,
+      "name": "Switch TP-Link TL-SG108 8 Portas Gigabit",
+      "price": "219.90",
+      "category_name": "Redes"
+    },
+    {
+      "id": 18,
+      "category_id": 6,
+      "name": "Cabo de Rede Cat6 2m",
+      "price": "29.90",
+      "category_name": "Redes"
+    },
+    {
+      "id": 19,
+      "category_id": 7,
+      "name": "Impressora Epson EcoTank L3250",
+      "price": "1199.00",
+      "category_name": "Energia e Impressão"
+    },
+    {
+      "id": 20,
+      "category_id": 7,
+      "name": "Nobreak Intelbras XNB 720VA",
+      "price": "679.90",
+      "category_name": "Energia e Impressão"
+    },
+    {
+      "id": 21,
+      "category_id": 7,
+      "name": "Filtro de Linha Clamper 5 Tomadas",
+      "price": "89.90",
+      "category_name": "Energia e Impressão"
+    },
+    {
+      "id": 22,
+      "category_id": 8,
+      "name": "Cadeira Gamer ThunderX3 EC3",
+      "price": "1199.00",
+      "category_name": "Acessórios de Escritório"
+    },
+    {
+      "id": 23,
+      "category_id": 8,
+      "name": "Mesa de Escritorio 120cm com 2 Gavetas",
+      "price": "699.00",
+      "category_name": "Acessórios de Escritório"
+    },
+    {
+      "id": 24,
+      "category_id": 8,
+      "name": "Suporte Articulado para Monitor ELG F80N",
+      "price": "289.90",
+      "category_name": "Acessórios de Escritório"
+    },
+    {
+      "id": 25,
+      "category_id": 8,
+      "name": "Base Refrigerada para Notebook C3Tech NBC-50",
+      "price": "139.90",
+      "category_name": "Acessórios de Escritório"
+    }
+  ]
+}

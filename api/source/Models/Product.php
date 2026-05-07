@@ -59,4 +59,13 @@ class Product
         $this->price = $price;
     }
 
+    public function listAll (): array
+    {
+        $query = "SELECT products.*,  products_categories.name as 'category_name'
+                  FROM products
+                  JOIN products_categories ON products.category_id = products_categories.id";
+        $stmt = Connect::getInstance()->query($query);
+        return $stmt->fetchAll();
+    }
+
 }
