@@ -68,4 +68,13 @@ class Product
         return $stmt->fetchAll();
     }
 
+    public function listById (int $id)
+    {
+        $query = "SELECT * FROM products WHERE id = :id";
+        $stmt = Connect::getInstance()->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
 }

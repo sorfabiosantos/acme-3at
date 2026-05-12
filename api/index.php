@@ -27,6 +27,8 @@ $route->namespace("Source\Controller");
 // localhost/acme-3am/api/hello
 $route->get("/hello", "Api:hello");
 $route->get("/products/list", "Products:productsList");
+$route->get("/products/list/{productId}","Products:productsListById");
+
 $route->get("/products-categories/list", "ProductsCategories:productsCategoriesList");
 $route->get("/users/list", "Users:usersList");
 
