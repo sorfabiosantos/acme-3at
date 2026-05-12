@@ -17,4 +17,12 @@ class Products extends Api
         )->back($response);
     }
 
+    public function productListById (array $data): void
+    {
+        $product = new Product();
+        $response = $product->selectById($data["productId"]);
+        $this->call("200","success","Produto encontrado","success")
+            ->back($response);
+    }
+
 }

@@ -24,7 +24,7 @@ class Api
         return $this;
     }
 
-    protected function back(?array $data = null): Api
+    protected function back(array | object $data = null): Api
     {
         header('Content-Type: application/json');
         if ($data) {
