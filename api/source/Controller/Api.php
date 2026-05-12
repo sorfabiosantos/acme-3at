@@ -12,6 +12,7 @@ class Api
 
     protected function call (int $code, ?string $status = null, ?string $message = null, ?string $type = null): Api
     {
+        http_response_code($code);
         if(!empty($status)){
             $this->response = [
                 "code" => $code,
@@ -25,6 +26,7 @@ class Api
 
     protected function back(?array $data = null): Api
     {
+        header('Content-Type: application/json');
         if ($data) {
             $this->response["data"] = $data;
         }
