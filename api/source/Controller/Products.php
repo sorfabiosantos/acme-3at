@@ -19,15 +19,34 @@ class Products extends Api
 
     public function productsListById (array $data): void
     {
+        //var_dump($data);
         if(!filter_var($data["productId"], FILTER_VALIDATE_INT)) {
-            $this->call(404,"not_found", "Produto não encontrado","error")
+            $this->call(
+                400,
+                "bad_request",
+                "ID do produto é obrigatório e deve ser um número inteiro",
+                "error"
+            )
                 ->back(null);
             return;
         }
 
         $product = new Product();
+        /*$this->call("200","success","Produto encontrado","success")
+            ->back();*/
+        $product = $product->listById($data["productId"]);
+        if(!$product) {
+            $this->call(
+                404,
+                "not_found",
+                "Produto não encontrado",
+                "error"
+            )->back(null);
+            return;
+        }
+
         $this->call("200","success","Produto encontrado","success")
-            ->back($product->listById($data["productId"]));
+            ->back($product);
     }
 
 }
