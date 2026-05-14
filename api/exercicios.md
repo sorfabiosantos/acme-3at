@@ -117,7 +117,63 @@ Trate os seguintes cenários:
 
 ---
 
-## Exercício 03 — Inserindo um novo produto
+## Exercício 03 — Buscando uma categoria de produto pelo ID
+
+### Contextualizando
+
+Com o endpoint de listagem de categorias funcionando, o próximo passo natural é permitir que o frontend busque os detalhes de **uma categoria de produto específica** — por exemplo, ao clicar em um item da tabela.
+
+### Objetivo
+
+Criar um endpoint que receba um `id` via URL, valide o parâmetro, consulte o banco e retorne a categoria de produto encontrada — ou uma mensagem de erro adequada caso o `id` seja inválido ou a vategoria não exista.
+
+### Enunciado
+
+Implemente o endpoint `GET /categories-products/list/{categoryId}`.
+
+Trate os seguintes cenários:
+
+**✅ Produto encontrado — `200 OK`**
+```json
+{
+  "code": 200,
+  "type": "success",
+  "status": "success",
+  "message": "Categoria encontrada",
+  "data": {
+    "id": 1,
+    "name": "Periféricos"
+  }
+}
+```
+
+**⚠️ ID inválido (não é número inteiro) — `400 Bad Request`**
+```json
+{
+  "code": 400,
+  "type": "error",
+  "status": "bad_request",
+  "message": "ID da categoria do produto é obrigatório e deve ser um número inteiro",
+  "data": null
+}
+```
+
+**❌ Categoria de Produto não existe no banco — `404 Not Found`**
+```json
+{
+  "code": 404,
+  "type": "error",
+  "status": "not_found",
+  "message": "Categoria não encontrada",
+  "data": null
+}
+```
+
+> 💡 **Dica:** Valide o parâmetro `{categpryId}` antes de consultar o banco. Use `filter_var($id, FILTER_VALIDATE_INT)` para verificar se é um inteiro válido.
+
+---
+
+## Exercício 04 — Inserindo um novo produto
 
 ### Contextualizando
 
@@ -184,7 +240,7 @@ Trate os seguintes cenários:
 
 ---
 
-## Exercício 04 — Atualizando um produto
+## Exercício 05 — Atualizando um produto
 
 ### Contextualizando
 
@@ -251,7 +307,7 @@ Trate os seguintes cenários:
 
 ---
 
-## Exercício 05 — Removendo um produto (soft delete)
+## Exercício 06 — Removendo um produto (soft delete)
 
 ### Contextualizando
 
