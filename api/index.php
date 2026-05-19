@@ -28,6 +28,7 @@ $route->namespace("Source\Controller");
 $route->get("/hello", "Api:hello");
 $route->get("/products/list", "Products:productsList");
 $route->get("/products/list/{productId}","Products:productListById");
+$route->post("/products","Products:insert");
 
 $route->get("/products-categories/list", "ProductsCategories:productsCategoriesList");
 $route->get("/users/list", "Users:usersList");

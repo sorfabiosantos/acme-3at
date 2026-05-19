@@ -45,4 +45,36 @@ class Products extends Api
             ->back($response);
     }
 
+    public function insert (array $data): void
+    {
+        //echo "Olá, a rota está funcionando!";
+        //var_dump($data["name"], $data["price"], $data["category_id"]);
+
+        if(!isset($data["name"]) || !isset($data["price"]) || !isset($data["category_id"]) ||
+            empty($data["name"]) || empty($data["price"]) || empty($data["category_id"])) {
+            $this->call(
+                400,
+                "bad_request",
+                "Os campos name, price e category_id são obrigatórios",
+                "error"
+            )->back();
+            return;
+        }
+
+        $product = new Product(null, $data["category_id"], $data["name"], $data["price"]);
+
+        if(!$product->insert()){
+
+        }
+
+        $response = [
+            "id" => $product->getId(),
+            "name" => $product->getName(),
+            "price" => $product->getPrice(),
+            "category_id" => $product->getCategoryId()
+        ];
+        $this->call("201","created","Produto cadastrado com sucesso","success")
+            ->back($response);
+    }
+
 }
