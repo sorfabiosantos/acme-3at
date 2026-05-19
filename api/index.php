@@ -31,6 +31,7 @@ $route->get("/products/list/{productId}","Products:productsListById");
 
 $route->get("/products-categories/list", "ProductsCategories:productsCategoriesList");
 $route->get("/users/list", "Users:usersList");
+$route->post("/products", "Products:insert");
 
 $route->dispatch();
 
