@@ -240,6 +240,66 @@ Trate os seguintes cenários:
 
 ---
 
+## Exercício 04.1 — Inserindo uma nova categoria de produto
+
+### Contextualizando
+
+O painel administrativo precisa de uma tela para cadastrar novas categorias de produtos. O formulário envia apenas o `name` da categoria para a API, que valida o dado e insere o registro no banco. O frontend espera receber de volta a nova categoria de produto recém-criada para confirmar o sucesso ao usuário.
+
+### Objetivo
+
+Criar um endpoint que receba o nome da categoria do produto via `POST`, valide o campo obrigatório, insira o registro no banco e retorne a categoria do produto criada.
+
+### Enunciado
+
+Implemente o endpoint `POST /categories-products`.
+
+O corpo da requisição (`body`) será um JSON com:
+```json
+{
+  "name": "Nova Categoria"
+}
+```
+
+Trate os seguintes cenários:
+
+**✅ Produto criado com sucesso — `201 Created`**
+```json
+{
+  "code": 201,
+  "type": "success",
+  "status": "created",
+  "message": "Categoria de Produto criada com sucesso",
+  "data": {
+    "id": 26,
+    "name": "Nova Categoria"
+  }
+}
+```
+
+**⚠️ Campo obrigatório ausente ou inválido — `400 Bad Request`**
+```json
+{
+  "code": 400,
+  "type": "error",
+  "status": "bad_request",
+  "message": "O campo nome é obrigatório",
+  "data": null
+}
+```
+
+**❌ Erro inesperado ao salvar — `500 Internal Server Error`**
+```json
+{
+  "code": 500,
+  "type": "error",
+  "status": "internal_server_error",
+  "message": "Não foi possível cadastrar o produto",
+  "data": null
+}
+```
+---
+
 ## Exercício 05 — Atualizando um produto
 
 ### Contextualizando
