@@ -28,11 +28,12 @@ $route->namespace("Source\Controller");
 $route->get("/hello", "Api:hello");
 $route->get("/products/list", "Products:productsList");
 $route->get("/products/list/{productId}","Products:productsListById");
+$route->put("/products/{productId}","Products:update");
+$route->delete("/products/{productId}","Products:delete");
 
 $route->get("/products-categories/list", "ProductsCategories:productsCategoriesList");
 $route->get("/users/list", "Users:usersList");
 $route->post("/products", "Products:insert");
-$route->put("/products/{id}", "Products:update");
 
 $route->dispatch();
 
