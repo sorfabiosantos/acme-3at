@@ -74,4 +74,9 @@ class Products extends Api
             ->back($product);
     }
 
+    public function update (array $data)
+    {
+        var_dump($data);
+    }
+
 }
