@@ -29,6 +29,8 @@ $route->get("/hello", "Api:hello");
 $route->get("/products/list", "Products:productsList");
 $route->get("/products/list/{productId}","Products:productListById");
 $route->post("/products","Products:insert");
+$route->put("/products/{productId}","Products:update");
+$route->delete("/products/{productId}","Products:delete");
 
 $route->get("/products-categories/list", "ProductsCategories:productsCategoriesList");
 $route->get("/users/list", "Users:usersList");

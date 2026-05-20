@@ -77,4 +77,16 @@ class Products extends Api
             ->back($response);
     }
 
+    public function update (array $data)
+    {
+        echo "Olá, a rota de update está funcionando!";
+        var_dump($data);
+    }
+
+    public function delete (array $data)
+    {
+        echo "Olá, a rota de delete está funcionando!";
+        var_dump($data);
+    }
+
 }
