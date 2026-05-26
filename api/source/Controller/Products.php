@@ -9,9 +9,6 @@ class Products extends Api
 {
     public function listById(array $data): void
     {
-        /*$product = new Product();
-        $product->selectById(2);
-        var_dump($product);*/
 
         if(!isset($data["product_id"]) || empty($data["product_id"]) || !filter_var($data["product_id"], FILTER_VALIDATE_INT)) {
             $this->call(
@@ -49,7 +46,7 @@ class Products extends Api
     {
         $products = new Product();
         // com filtro
-         $this->call(200,"success","Lista de Produtos","success")->back($products->selectAll(['category_id = 2']));
+        $this->call(200,"success","Lista de Produtos","success")->back($products->selectAll(['category_id = 3']));
         // sem filtro
         // $this->call(200,"success","Lista de Produtos","success")->back($products->selectAll());
     }

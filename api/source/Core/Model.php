@@ -10,7 +10,7 @@ abstract class Model
 {
     protected string $table = '';
     protected string $primaryKey = 'id';
-    protected array $fillable = []; // camelCase
+    protected array $fillable = [];
 
     protected ?string $errorMessage = null;
 
