@@ -28,7 +28,7 @@
 ## Fluxo de trabalho e integração
 - Espera-se rewrite do Apache. `api/.htaccess` direciona requisições que não são arquivo/pasta para `index.php?route=/$1`; portanto, o roteamento backend deve respeitar o parâmetro `route`.
 - O autoload do Composer é esperado pela documentação, mas `api/composer.json` está vazio hoje. Se implementar classes com namespace de verdade, provavelmente será necessário definir PSR-4 ali, em vez de assumir que já funciona.
-- A configuração de banco também está apenas documentada, não implementada: `data-base/README.MD` descreve `dump.sql`, mas o arquivo versionado real é `data-base/dump.slq` e está vazio. Trate trabalho de schema como peça faltante, não como contrato existente.
+- A configuração de banco também está apenas documentada, não implementada: `data-base/README.MD` descreve `acme-tarde-dump.sql`, mas o arquivo versionado real é `data-base/dump.slq` e está vazio. Trate trabalho de schema como peça faltante, não como contrato existente.
 - Não foram encontrados testes automatizados, configuração de linter ou scripts de build no workspace. Valide alterações rastreando manualmente o fluxo de entrada e verificando consistência de path/namespace.
 
 ## Formas seguras de evoluir o projeto

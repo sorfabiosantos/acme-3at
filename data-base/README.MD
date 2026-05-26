@@ -16,7 +16,7 @@ facilmente.
 
 ```
 data-base/
-└── dump.sql    ← Script SQL com a estrutura e dados do banco
+└── acme-tarde-dump.sql    ← Script SQL com a estrutura e dados do banco
 ```
 
 ---
@@ -31,7 +31,7 @@ Um **dump** (despejo) SQL é um arquivo que contém comandos SQL para:
 
 ---
 
-### 💡 Exemplo de conteúdo do dump.sql
+### 💡 Exemplo de conteúdo do acme-tarde-dump.sql
 
 ```sql
 -- ============================================
@@ -68,13 +68,13 @@ INSERT INTO users (name, email, password) VALUES
 ### 🚀 Como usar?
 
 1. Abra o **phpMyAdmin** ou outro cliente MySQL
-2. Copie o conteúdo do arquivo `dump.sql`
+2. Copie o conteúdo do arquivo `acme-tarde-dump.sql`
 3. Cole na aba **SQL** e clique em **Executar**
 4. Pronto! O banco de dados está criado e populado
 
 Ou pelo terminal:
 ```bash
-mysql -u root -p < dump.sql
+mysql -u root -p < acme-tarde-dump.sql
 ```
 
 ---
@@ -88,6 +88,6 @@ mysql -u root -p < dump.sql
 
 ---
 
-> 💡 **Dica:** Sempre que adicionar uma nova tabela ao projeto, atualize o `dump.sql`
+> 💡 **Dica:** Sempre que adicionar uma nova tabela ao projeto, atualize o `acme-tarde-dump.sql`
 > para que todos da equipe tenham a mesma estrutura.
 

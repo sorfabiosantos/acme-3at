@@ -24,16 +24,17 @@ use CoffeeCode\Router\Router;
 $route = new Router(url("api"),":");
 
 $route->namespace("Source\Controller");
-// localhost/acme-3am/api/hello
-$route->get("/hello", "Api:hello");
-$route->get("/products/list", "Products:productsList");
-$route->get("/products/list/{productId}","Products:productListById");
-$route->post("/products","Products:insert");
-$route->put("/products/{productId}","Products:update");
-$route->delete("/products/{productId}","Products:delete");
 
-$route->get("/products-categories/list", "ProductsCategories:productsCategoriesList");
-$route->get("/users/list", "Users:usersList");
+// Início - Exercícios - Desafios
+$route->group("/products");
+$route->get("/list/{product_id}","Products:listById"); // select by id
+$route->get("/list","Products:listAll"); // select all
+$route->get("/list/paginator/{page}/{per_page}","Products:listPaginator"); // select all
+$route->post("/","Products:insert"); // insert
+$route->put("/{product_id}","Products:update"); // update
+$route->delete("/{product_id}","Products:delete"); // update
+$route->group(null);
+// Fim - Exercícios - Desafios
 
 $route->dispatch();
 
