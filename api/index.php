@@ -36,6 +36,13 @@ $route->delete("/{product_id}","Products:delete"); // update
 $route->group(null);
 // Fim - Exercícios - Desafios
 
+$route->group("/faqs");
+$route->group(null);
+
+$route->group("/faqs-categories");
+$route->group(null);
+
+
 $route->dispatch();
 
 /** ERROR REDIRECT */
