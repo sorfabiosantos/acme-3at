@@ -1,6 +1,6 @@
 <?php
 
-namespace Source\Models\Faq;
+namespace Source\Models\Faqs;
 
 use Source\Core\Model;
 
