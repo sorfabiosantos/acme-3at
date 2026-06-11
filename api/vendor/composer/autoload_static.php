@@ -16,6 +16,10 @@ class ComposerStaticInit005683ec4e262a29d04b9ead07429804
         array (
             'Source\\' => 7,
         ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'C' => 
         array (
             'CoffeeCode\\Router\\' => 18,
@@ -26,6 +30,10 @@ class ComposerStaticInit005683ec4e262a29d04b9ead07429804
         'Source\\' => 
         array (
             0 => __DIR__ . '/../..' . '/source',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'CoffeeCode\\Router\\' => 
         array (

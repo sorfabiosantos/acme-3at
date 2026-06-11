@@ -9,6 +9,10 @@ class Products extends Api
 {
     public function listById(array $data): void
     {
+        /*$product = new Product();
+        $product->selectById($data["product_id"]);
+        echo $product->getName();
+        var_dump($product);*/
 
         if(!isset($data["product_id"]) || empty($data["product_id"]) || !filter_var($data["product_id"], FILTER_VALIDATE_INT)) {
             $this->call(
@@ -40,13 +44,15 @@ class Products extends Api
         ];
 
         $this->call(200,"success","Produto encontrado","success")->back($response);
+
     }
 
     public function listAll (array $data): void
     {
         $products = new Product();
         // com filtro
-        $this->call(200,"success","Lista de Produtos","success")->back($products->selectAll(['category_id = 3']));
+        $this->call(200,"success","Lista de Produtos","success")
+            ->back($products->selectAll(['category_id = 2']));
         // sem filtro
         // $this->call(200,"success","Lista de Produtos","success")->back($products->selectAll());
     }
@@ -73,6 +79,15 @@ class Products extends Api
 
     public function insert (array $data): void
     {
+        if(!$this->authToken (1)){
+            $this->call(
+                401,
+                "unauthorized",
+                "Usuário não está autenticado (sem token ou token inválido).",
+                "error")->back();
+            return;
+        }
+
         if(!$this->validate($data)){
             $this->call(
                 400,
@@ -108,6 +123,15 @@ class Products extends Api
 
     public function update (array $data): void
     {
+        if(!$this->authToken (1)){
+            $this->call(
+                401,
+                "unauthorized",
+                "Usuário não está autenticado (sem token ou token inválido).",
+                "error")->back();
+            return;
+        }
+
         if(!filter_var($data["product_id"], FILTER_VALIDATE_INT)) {
             $this->call(
                 400,
@@ -172,97 +196,6 @@ class Products extends Api
         }
 
         $this->call(200,"success","Produto excluído com sucesso","success")->back();
-    }
-
-    public function newList (array $data): void
-    {
-        echo "Olá, Mundo!!";
-
-        /**
-         * SELEÇÃO DE TODOS OS PRODUTOS
-         */
-/*
-        $product = new Product();
-        var_dump($product->selectAll());
-*/
-
-        /**
-         * SELEÇÃO DE PRODUTOS COM PAGINAÇÃO
-         */
-        $product = new Product();
-        var_dump($product->selectPaginator(1, 10, [], 'id', 'ASC'));
-
-        /**
-         * INCLUSÃO
-         */
-/*
-        $product = new Product(
-            null,
-            3,
-            "Notebook",
-            1000.00
-        );
-
-        var_dump($product);
-
-        if(!$product->insert()){
-            var_dump($product->getErrorMessage());
-        }
-        else {
-            var_dump("Inserido com sucesso!");
-        }
-
-        var_dump($product);*/
-
-        /**
-         * ALTERAÇÃO
-         */
-/*
-        $product = new Product(
-            null,
-            2,
-            "Smartphone",
-            500.00
-        );
-
-        var_dump($product);
-
-        if(!$product->updateById(54)){
-            var_dump($product->getErrorMessage());
-        }
-        else{
-            var_dump("Atualizado com sucesso!");
-        }
-        var_dump($product);
-*/
-        /**
-         * EXCLUSÃO - HARD
-         */
-/*
-        $product = new Product();
-        var_dump($product);
-        if(!$product->deleteById(25)){
-            var_dump($product->getErrorMessage());
-        }
-        else{
-            var_dump("Excluído com sucesso!");
-        }
-*/
-
-        /**
-         * EXCLUSÃO - SOFT
-         */
-/*
-        $product = new Product();
-        if(!$product->softDeleteById(24))
-        {
-            var_dump($product->getErrorMessage());
-        } else
-        {
-            var_dump("Excluído com sucesso!");
-        }
-*/
-
     }
 
     public function validate (array $data): bool

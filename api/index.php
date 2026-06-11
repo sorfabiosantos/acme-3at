@@ -25,7 +25,17 @@ $route = new Router(url("api"),":");
 
 $route->namespace("Source\Controller");
 
+$route->group("/users");
+$route->post("/register","Users:register"); // Registrar usuário comum
+$route->post("/login","Users:auth"); // login de usuário comum
+$route->put("/update","Users:update"); // update de usuário comum
+$route->post("/register-admin","Users:registerAdmin"); // Registrar usuário admin NÃO IMPLEMENTADO
+$route->post("/login-admin","Users:authAdmin"); // login de usuário admin
+$route->put("/update-admin","Users:updateAdmin"); // update de usuário admin
+$route->group(null);
+
 // Início - Exercícios - Desafios
+// Produtos
 $route->group("/products");
 $route->get("/list/{product_id}","Products:listById"); // select by id
 $route->get("/list","Products:listAll"); // select all
@@ -34,13 +44,19 @@ $route->post("/","Products:insert"); // insert
 $route->put("/{product_id}","Products:update"); // update
 $route->delete("/{product_id}","Products:delete"); // update
 $route->group(null);
-// Fim - Exercícios - Desafios
+// Categorias de FAQs
+$route->group("/products-categories");
 
+$route->group(null);
+// FAQs
 $route->group("/faqs");
-$route->group(null);
 
-$route->group("/faqs-categories");
 $route->group(null);
+// Categorias de FAQs
+$route->group("/faqs-categories");
+
+$route->group(null);
+// Fim - Exercícios - Desafios
 
 
 $route->dispatch();

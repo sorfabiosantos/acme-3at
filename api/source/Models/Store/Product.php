@@ -21,9 +21,9 @@ class Product extends Model
         $this->price = $price;
         $this->active = $active;
 
-        $this->table = 'products';
-        $this->primaryKey = 'id';
-        $this->fillable = ['categoryId', 'name', 'price', 'active'];
+        $this->table = 'products'; // nome da tabela do banco
+        $this->primaryKey = 'id'; // nome da chave primária da tabela
+        $this->fillable = ['categoryId', 'name', 'price', 'active']; // camelCase
     }
 
     public function getId(): ?int
