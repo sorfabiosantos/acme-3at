@@ -7,7 +7,7 @@ use Source\Core\JWTToken;
 
 class Api
 {
-    protected $userAuthId = null;
+    protected ?int $userAuthId = null;
 
     public function authToken (int $typeId): bool
     {
