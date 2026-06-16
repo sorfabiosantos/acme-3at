@@ -37,7 +37,7 @@ $route->group(null);
 $route->group("/address");
 $route->post("/register","Addresses:register");
 $route->put("/update","Addresses:update");
-$route->get("/user-id/{user-id}","Addresses:getAddressByUserId");
+$route->get("/by-user","Addresses:getAddressByUserId");
 $route->group(null);
 
 // Início - Exercícios - Desafios

@@ -6,10 +6,8 @@ use Source\Models\Address;
 
 class Addresses extends Api
 {
-    public function register (array $data): void
+    public function register(array $data): void
     {
-        // persistencia de dados
-
         if(!$this->authToken(2)){
             $this->call(401,
                 "unauthorized",
@@ -17,8 +15,8 @@ class Addresses extends Api
                 "error")->back();
             return;
         }
-        $address = new Address(null, $this->userAuthId, $data["street"], $data["number"]);
 
+        $address = new Address(null,$this->userAuthId,$data["street"],$data["number"]);
         if(!$address->insert()){
             $this->call(500,
                 "internal_server_error",
@@ -32,7 +30,7 @@ class Addresses extends Api
     public function update(array $data): void
     {
         // persistencia
-        if(!$this->authToken(2)){
+        if(!$this->authToken(2)){ // usuário comum standard
             $this->call(401,
                 "unauthorized",
                 "Token de autenticação inválido ou expirado.",
@@ -49,10 +47,11 @@ class Addresses extends Api
                 "error")->back();
             return;
         }
+
         $this->call(200, "success","Endereço atualizado com sucesso!" , "success")->back();
     }
 
-    public function getAddressByUserId (array $data): void
+    public function getAddressByUserId (): void
     {
         if(!$this->authToken(2)){
             $this->call(401,
@@ -62,7 +61,8 @@ class Addresses extends Api
             return;
         }
         $address = new Address();
-        var_dump($address->selectByUserId($this->userAuthId));
+        $this->call(200, "success","Endereço encontrado!" , "success")
+            ->back($address->selectByUserId($this->userAuthId));
     }
 
 }
