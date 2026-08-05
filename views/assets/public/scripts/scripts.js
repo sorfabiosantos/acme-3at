@@ -4,7 +4,7 @@
 
 // http://localhost:8080/acme-3am/api/faqs/category/6
 async function fetchFAQs() {
-  const response = await fetch("http://localhost:8080/acme-3am/api/faqs/category/6");
+  const response = await fetch("http://localhost:8080/acme-3at/api/faqs/category/1");
   //console.log(response);
   const faqs = await response.json();
   //console.log(faqs.data);
