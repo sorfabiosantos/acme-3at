@@ -2,3 +2,9 @@
 /api/.env
 /storage
 composer.lock
+/avaliacao
+/views/prova-a
+/api/syntax-check.php
+page-snapshot.md
+test-page-final.png
+/api/source/Controller/SyntaxCheck.php

@@ -1,10 +1,1108 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23FF6B00'/><text x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui' font-weight='800' font-size='18' fill='white'>⚡</text></svg>">
+    <meta name="description" content="Running Power — Gerencie sua assessoria de corrida com muito mais eficiência. Cadastre atletas, organize treinos, acompanhe a evolução e centralize sua operação em uma única plataforma.">
 
+    <!-- Open Graph -->
+    <meta property="og:title" content="Running Power — Plataforma para Assessorias de Corrida">
+    <meta property="og:description" content="Gerencie sua assessoria de corrida com muito mais eficiência. Organize atletas, treinos, provas e acompanhe a evolução de cada corredor.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Running Power — Plataforma para Assessorias de Corrida">
+    <meta name="twitter:description" content="Gerencie sua assessoria de corrida com muito mais eficiência. Organize atletas, treinos, provas e acompanhe a evolução de cada corredor.">
+
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN (dev only — use PostCSS plugin in production) -->
+    <script>
+      (function(){
+        var _warn = console.warn;
+        console.warn = function(msg) {
+          if (typeof msg === 'string' && msg.indexOf('cdn.tailwindcss.com should not be used in production') === 0) return;
+          _warn.apply(console, arguments);
+        };
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#FFF7F0',
+                            100: '#FFE8D6',
+                            200: '#FFD1AD',
+                            300: '#FFBA85',
+                            400: '#FFA35C',
+                            500: '#FF8C33',
+                            600: '#FF6B00',
+                            700: '#E55F00',
+                            800: '#CC5400',
+                            900: '#993F00',
+                        },
+                        surface: {
+                            DEFAULT: '#FFFFFF',
+                            muted: '#F3F4F6',
+                            dark: '#111827',
+                            gray: '#374151',
+                        },
+                        success: {
+                            DEFAULT: '#10B981',
+                            light: '#D1FAE5',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest">
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="views/assets/public/styles/styles.css">
+
+    <title>Running Power — Plataforma para Assessorias de Corrida</title>
+</head>
+<body class="font-sans antialiased text-surface-dark bg-white">
+
+    <!-- HEADER -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" role="banner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 lg:h-20">
+                <a href="#" class="flex items-center gap-2.5 font-extrabold text-xl text-surface-dark no-underline" aria-label="Running Power — Ir para o início">
+                    <i data-lucide="zap" class="w-6 h-6 text-brand-600" aria-hidden="true"></i>
+                    <span>Running<span class="text-brand-600">Power</span></span>
+                </a>
+
+                <nav class="hidden lg:flex items-center gap-8" aria-label="Navegação principal">
+                    <a href="#beneficios" class="text-sm font-medium text-surface-gray hover:text-brand-600 transition-colors no-underline">Benefícios</a>
+                    <a href="#funcionalidades" class="text-sm font-medium text-surface-gray hover:text-brand-600 transition-colors no-underline">Funcionalidades</a>
+                    <a href="#planos" class="text-sm font-medium text-surface-gray hover:text-brand-600 transition-colors no-underline">Planos</a>
+                    <a href="#depoimentos" class="text-sm font-medium text-surface-gray hover:text-brand-600 transition-colors no-underline">Depoimentos</a>
+                    <a href="#faq" class="text-sm font-medium text-surface-gray hover:text-brand-600 transition-colors no-underline">FAQ</a>
+                </nav>
+
+                <a href="#planos" class="hidden lg:inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600 text-white font-semibold text-sm rounded-lg hover:bg-brand-700 transition-all duration-250 no-underline hover:shadow-lg hover:shadow-brand-600/25 active:scale-[0.98]">
+                    Começar Gratuitamente
+                </a>
+
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-lg hover:bg-surface-muted transition-colors" aria-label="Abrir menu" aria-expanded="false">
+                    <i data-lucide="menu" class="w-6 h-6" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu lg:hidden" role="dialog" aria-label="Menu de navegação" aria-hidden="true">
+        <div class="flex items-center justify-between mb-8">
+            <a href="#" class="flex items-center gap-2.5 font-extrabold text-xl text-surface-dark no-underline">
+                <i data-lucide="zap" class="w-6 h-6 text-brand-600" aria-hidden="true"></i>
+                <span>Running<span class="text-brand-600">Power</span></span>
+            </a>
+            <button id="mobile-menu-close" class="p-2 rounded-lg hover:bg-surface-muted transition-colors" aria-label="Fechar menu">
+                <i data-lucide="x" class="w-6 h-6" aria-hidden="true"></i>
+            </button>
+        </div>
+        <nav class="flex flex-col gap-4" aria-label="Navegação mobile">
+            <a href="#beneficios" class="text-lg font-medium text-surface-dark hover:text-brand-600 transition-colors no-underline py-2">Benefícios</a>
+            <a href="#funcionalidades" class="text-lg font-medium text-surface-dark hover:text-brand-600 transition-colors no-underline py-2">Funcionalidades</a>
+            <a href="#planos" class="text-lg font-medium text-surface-dark hover:text-brand-600 transition-colors no-underline py-2">Planos</a>
+            <a href="#depoimentos" class="text-lg font-medium text-surface-dark hover:text-brand-600 transition-colors no-underline py-2">Depoimentos</a>
+            <a href="#faq" class="text-lg font-medium text-surface-dark hover:text-brand-600 transition-colors no-underline py-2">FAQ</a>
+        </nav>
+        <div class="mt-auto pt-8">
+            <a href="#planos" class="btn-primary w-full">Começar Gratuitamente</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- HERO -->
+        <section class="relative pt-28 pb-16 lg:pt-36 lg:pb-24 overflow-hidden" aria-labelledby="hero-heading">
+            <div class="absolute inset-0 -z-10" aria-hidden="true">
+                <span class="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] rounded-full bg-brand-50 blur-3xl opacity-60 block"></span>
+                <span class="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-brand-100 blur-3xl opacity-40 block"></span>
+            </div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                    <header class="animate-on-scroll">
+                        <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-brand-50 text-brand-700 text-sm font-semibold rounded-full mb-6">
+                            <i data-lucide="sparkles" class="w-4 h-4" aria-hidden="true"></i>
+                            Plataforma para assessorias de corrida
+                        </span>
+
+                        <h1 id="hero-heading" class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-surface-dark leading-[1.1] mb-6">
+                            Gerencie sua assessoria de corrida com muito mais <mark class="text-brand-600 bg-transparent">eficiência</mark>.
+                        </h1>
+
+                        <p class="text-lg sm:text-xl text-surface-gray leading-relaxed mb-8 max-w-xl">
+                            Organize atletas, treinos, provas e acompanhe a evolução de cada corredor em uma única plataforma.
+                        </p>
+
+                        <p class="flex flex-col sm:flex-row gap-3 mb-10">
+                            <a href="#planos" class="btn-primary">
+                                Começar Gratuitamente
+                                <i data-lucide="arrow-right" class="w-5 h-5" aria-hidden="true"></i>
+                            </a>
+                            <a href="#funcionalidades" class="btn-secondary">
+                                <i data-lucide="play" class="w-5 h-5" aria-hidden="true"></i>
+                                Ver Demonstração
+                            </a>
+                        </p>
+
+                        <p class="flex flex-wrap gap-6 sm:gap-10">
+                            <span class="hero-metric" style="animation-delay: 0.3s">
+                                <strong class="text-2xl sm:text-3xl font-extrabold text-surface-dark block">
+                                    <span data-count="1200" data-suffix="+">0</span>
+                                </strong>
+                                <small class="text-sm text-surface-gray">atletas cadastrados</small>
+                            </span>
+                            <span class="hero-metric" style="animation-delay: 0.5s">
+                                <strong class="text-2xl sm:text-3xl font-extrabold text-surface-dark block">
+                                    <span data-count="50000" data-suffix="+">0</span>
+                                </strong>
+                                <small class="text-sm text-surface-gray">treinos realizados</small>
+                            </span>
+                            <span class="hero-metric" style="animation-delay: 0.7s">
+                                <strong class="text-2xl sm:text-3xl font-extrabold text-surface-dark block">
+                                    <span data-count="3500" data-suffix="+">0</span>
+                                </strong>
+                                <small class="text-sm text-surface-gray">provas cadastradas</small>
+                            </span>
+                        </p>
+                    </header>
+
+                    <figure class="animate-on-scroll animate-on-scroll-delay-2 lg:flex lg:justify-end">
+                        <figcaption class="sr-only">Dashboard do Running Power exibindo métricas de atletas, treinos e provas</figcaption>
+                        <span class="relative glow-pulse rounded-2xl block">
+                            <span class="bg-surface-dark rounded-2xl shadow-2xl overflow-hidden border border-gray-800 block">
+                                <span class="flex items-center gap-2 px-4 py-3 bg-gray-900" aria-hidden="true">
+                                    <span class="flex gap-1.5">
+                                        <span class="w-3 h-3 rounded-full bg-red-500/70 block"></span>
+                                        <span class="w-3 h-3 rounded-full bg-yellow-500/70 block"></span>
+                                        <span class="w-3 h-3 rounded-full bg-green-500/70 block"></span>
+                                    </span>
+                                    <span class="flex-1 mx-4">
+                                        <span class="bg-gray-800 rounded-md px-4 py-1.5 text-xs text-gray-400 text-center block">app.runningpower.com.br</span>
+                                    </span>
+                                </span>
+
+                                <span class="p-5 space-y-4 block">
+                                    <span class="grid grid-cols-3 gap-3" aria-hidden="true">
+                                        <span class="bg-gray-800 rounded-lg p-3 block">
+                                            <small class="text-xs text-gray-400 mb-1 block">Atletas</small>
+                                            <strong class="text-lg font-bold text-white block">1.234</strong>
+                                        </span>
+                                        <span class="bg-gray-800 rounded-lg p-3 block">
+                                            <small class="text-xs text-gray-400 mb-1 block">Treinos</small>
+                                            <strong class="text-lg font-bold text-white block">342</strong>
+                                        </span>
+                                        <span class="bg-gray-800 rounded-lg p-3 block">
+                                            <small class="text-xs text-gray-400 mb-1 block">Provas</small>
+                                            <strong class="text-lg font-bold text-white block">28</strong>
+                                        </span>
+                                    </span>
+
+                                    <span class="bg-gray-800 rounded-lg p-4 block" aria-hidden="true">
+                                        <small class="text-xs text-gray-400 mb-3 block">Evolução dos atletas</small>
+                                        <span class="flex items-end gap-1.5 h-24">
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:40%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:55%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:45%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:70%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:60%"></span>
+                                            <span class="flex-1 bg-brand-600 rounded-t-sm block" style="height:80%"></span>
+                                            <span class="flex-1 bg-brand-600 rounded-t-sm block" style="height:90%"></span>
+                                            <span class="flex-1 bg-brand-600 rounded-t-sm block" style="height:85%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:75%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:65%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:55%"></span>
+                                            <span class="flex-1 bg-brand-600/60 rounded-t-sm block" style="height:60%"></span>
+                                        </span>
+                                    </span>
+
+                                    <span class="space-y-2 block" aria-hidden="true">
+                                        <span class="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
+                                            <span class="w-8 h-8 rounded-full bg-brand-600/20 flex items-center justify-center">
+                                                <i data-lucide="user" class="w-4 h-4 text-brand-400"></i>
+                                            </span>
+                                            <span class="flex-1 min-w-0">
+                                                <strong class="text-sm font-medium text-white truncate block">Maria Silva</strong>
+                                                <small class="text-xs text-gray-400 block">Treino intervalado — 8 km</small>
+                                            </span>
+                                            <small class="text-xs font-medium text-success-light bg-success-light/10 px-2 py-0.5 rounded-full">Concluído</small>
+                                        </span>
+                                        <span class="flex items-center gap-3 bg-gray-800 rounded-lg p-3">
+                                            <span class="w-8 h-8 rounded-full bg-brand-600/20 flex items-center justify-center">
+                                                <i data-lucide="user" class="w-4 h-4 text-brand-400"></i>
+                                            </span>
+                                            <span class="flex-1 min-w-0">
+                                                <strong class="text-sm font-medium text-white truncate block">João Santos</strong>
+                                                <small class="text-xs text-gray-400 block">Regenerativo — 5 km</small>
+                                            </span>
+                                            <small class="text-xs font-medium text-brand-400 bg-brand-600/10 px-2 py-0.5 rounded-full">Hoje</small>
+                                        </span>
+                                    </span>
+                                </span>
+                            </span>
+
+                            <span class="absolute -bottom-4 -right-4 bg-brand-600 text-white px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
+                                <i data-lucide="trending-up" class="w-4 h-4"></i>
+                                <small class="text-sm font-semibold">+24% este mês</small>
+                            </span>
+                        </span>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- BENEFITS -->
+        <section id="beneficios" class="py-16 lg:py-24 bg-surface-muted" aria-labelledby="benefits-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center max-w-3xl mx-auto mb-14 animate-on-scroll">
+                    <h2 id="benefits-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Tudo o que você precisa em um só lugar
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Substitua planilhas, grupos de WhatsApp e controles manuais por uma plataforma feita para assessorias de corrida.
+                    </p>
+                </header>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll">
+                        <span class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5" aria-hidden="true">
+                            <i data-lucide="clock" class="w-6 h-6 text-brand-600"></i>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Economize tempo</h3>
+                        <p class="text-surface-gray leading-relaxed">Reduza horas de trabalho manual com planilhas e concentre-se no que realmente importa: seus atletas.</p>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-1">
+                        <span class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5" aria-hidden="true">
+                            <i data-lucide="layers" class="w-6 h-6 text-brand-600"></i>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Centralize as informações</h3>
+                        <p class="text-surface-gray leading-relaxed">Atletas, treinos, provas e resultados em uma única plataforma. Nunca mais perca dados importantes.</p>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-2">
+                        <span class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5" aria-hidden="true">
+                            <i data-lucide="users" class="w-6 h-6 text-brand-600"></i>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Organize seus atletas</h3>
+                        <p class="text-surface-gray leading-relaxed">Cadastre, categorize e acompanhe cada atleta individualmente com perfil completo e histórico.</p>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll">
+                        <span class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5" aria-hidden="true">
+                            <i data-lucide="message-circle" class="w-6 h-6 text-brand-600"></i>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Melhore a comunicação</h3>
+                        <p class="text-surface-gray leading-relaxed">Compartilhe treinos, resultados e feedback diretamente na plataforma, sem depender de grupos de mensagens.</p>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-1">
+                        <span class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5" aria-hidden="true">
+                            <i data-lucide="bar-chart-3" class="w-6 h-6 text-brand-600"></i>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Acompanhe a evolução</h3>
+                        <p class="text-surface-gray leading-relaxed">Visualize a progressão de cada atleta com gráficos, estatísticas e relatórios detalhados de desempenho.</p>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-2">
+                        <span class="w-12 h-12 rounded-xl bg-brand-50 flex items-center justify-center mb-5" aria-hidden="true">
+                            <i data-lucide="target" class="w-6 h-6 text-brand-600"></i>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Tome decisões com dados</h3>
+                        <p class="text-surface-gray leading-relaxed">Dashboards completos e indicadores de performance para você tomar decisões baseadas em dados reais.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES -->
+        <section id="funcionalidades" class="py-16 lg:py-24" aria-labelledby="features-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center max-w-3xl mx-auto mb-14 animate-on-scroll">
+                    <h2 id="features-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Funcionalidades pensadas para o seu dia a dia
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Cada recurso foi desenvolvido ouvindo treinadores e assessorias reais. Nada de funcionalidades que ninguém usa.
+                    </p>
+                </header>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="user-plus" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Cadastro de atletas</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Perfil completo com dados pessoais, metas e histórico.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-1">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="clipboard-list" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Cadastro de treinos</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Crie treinos personalizados para cada atleta ou grupo.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-2">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="calendar" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Agenda</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Visualize todos os treinos e eventos em um calendário integrado.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-3">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="trophy" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Provas</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Cadastre provas, inscreva atletas e registre resultados.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="history" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Histórico</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Acompanhe toda a jornada do atleta, do primeiro treino à última prova.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-1">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="layout-dashboard" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Dashboard</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Visão geral da sua assessoria com indicadores principais.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-2">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="trending-up" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Estatísticas</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Métricas de desempenho, volume e consistência dos treinos.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-3">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="file-text" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Relatórios</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Gere relatórios detalhados e exporte em PDF com um clique.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="send" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Comunicação</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Envie treinos e comunicados diretamente para seus atletas.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-1">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-brand-50 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="building-2" class="w-5 h-5 text-brand-600"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Gestão da assessoria</h3>
+                            <p class="text-sm text-surface-gray leading-relaxed">Gerencie sua equipe, treinadores e estrutura organizacional.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-2">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="wallet" class="w-5 h-5 text-gray-400"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Financeiro</h3>
+                            <small class="inline-block text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full mb-1">Em breve</small>
+                            <p class="text-sm text-surface-gray leading-relaxed">Controle de mensalidades, pagamentos e inadimplência.</p>
+                        </span>
+                    </article>
+
+                    <article class="flex items-start gap-4 p-5 rounded-xl hover:bg-surface-muted transition-colors animate-on-scroll animate-on-scroll-delay-3">
+                        <span class="flex-shrink-0 w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mt-0.5" aria-hidden="true">
+                            <i data-lucide="smartphone" class="w-5 h-5 text-gray-400"></i>
+                        </span>
+                        <span>
+                            <h3 class="font-semibold text-surface-dark mb-1">Integração Strava</h3>
+                            <small class="inline-block text-xs font-medium text-brand-600 bg-brand-50 px-2 py-0.5 rounded-full mb-1">Em breve</small>
+                            <p class="text-sm text-surface-gray leading-relaxed">Sincronize automaticamente os treinos dos seus atletas com o Strava.</p>
+                        </span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW IT WORKS -->
+        <section class="py-16 lg:py-24 bg-surface-muted" aria-labelledby="how-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center max-w-3xl mx-auto mb-14 animate-on-scroll">
+                    <h2 id="how-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Comece em <mark class="text-brand-600 bg-transparent">4 passos</mark>
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Simples, rápido e direto ao ponto. Você não precisa de tutoriais complexos para começar.
+                    </p>
+                </header>
+
+                <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 relative list-none p-0">
+                    <hr class="hidden lg:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-brand-200 border-0 -z-0" aria-hidden="true">
+
+                    <li class="relative z-10 text-center animate-on-scroll">
+                        <span class="w-20 h-20 rounded-2xl bg-brand-600 text-white flex items-center justify-center mx-auto mb-5 shadow-lg shadow-brand-600/25">
+                            <strong class="text-2xl font-extrabold">1</strong>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Cadastre sua assessoria</h3>
+                        <p class="text-surface-gray text-sm leading-relaxed">Crie seu perfil em menos de 2 minutos. Sem burocracia.</p>
+                    </li>
+
+                    <li class="relative z-10 text-center animate-on-scroll animate-on-scroll-delay-1">
+                        <span class="w-20 h-20 rounded-2xl bg-brand-600 text-white flex items-center justify-center mx-auto mb-5 shadow-lg shadow-brand-600/25">
+                            <strong class="text-2xl font-extrabold">2</strong>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Cadastre seus atletas</h3>
+                        <p class="text-surface-gray text-sm leading-relaxed">Adicione cada corredor com nome, metas e informações relevantes.</p>
+                    </li>
+
+                    <li class="relative z-10 text-center animate-on-scroll animate-on-scroll-delay-2">
+                        <span class="w-20 h-20 rounded-2xl bg-brand-600 text-white flex items-center justify-center mx-auto mb-5 shadow-lg shadow-brand-600/25">
+                            <strong class="text-2xl font-extrabold">3</strong>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Organize os treinos</h3>
+                        <p class="text-surface-gray text-sm leading-relaxed">Crie e distribua treinos individuais ou em grupo com poucos cliques.</p>
+                    </li>
+
+                    <li class="relative z-10 text-center animate-on-scroll animate-on-scroll-delay-3">
+                        <span class="w-20 h-20 rounded-2xl bg-success-DEFAULT text-white flex items-center justify-center mx-auto mb-5 shadow-lg shadow-success-DEFAULT/25">
+                            <strong class="text-2xl font-extrabold">4</strong>
+                        </span>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Acompanhe a evolução</h3>
+                        <p class="text-surface-gray text-sm leading-relaxed">Visualize métricas, dashboards e relatórios da evolução de cada atleta.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- DIFFERENTIATORS -->
+        <section class="py-16 lg:py-24" aria-labelledby="diff-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center max-w-3xl mx-auto mb-14 animate-on-scroll">
+                    <h2 id="diff-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Por que escolher o Running Power?
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Diferenciais que fazem a diferença no seu dia a dia como treinador.
+                    </p>
+                </header>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <article class="bg-surface-muted rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll">
+                        <i data-lucide="target" class="w-8 h-8 text-brand-600 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Foco em corrida</h3>
+                        <p class="text-surface-gray leading-relaxed">Desenvolvido exclusivamente para assessorias de corrida de rua. Nada de adaptações genéricas.</p>
+                    </article>
+
+                    <article class="bg-surface-muted rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-1">
+                        <i data-lucide="mouse-pointer-2" class="w-8 h-8 text-brand-600 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Interface simples</h3>
+                        <p class="text-surface-gray leading-relaxed">Design intuitivo que você aprende a usar em minutos, não em semanas.</p>
+                    </article>
+
+                    <article class="bg-surface-muted rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-2">
+                        <i data-lucide="monitor-smartphone" class="w-8 h-8 text-brand-600 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Qualquer dispositivo</h3>
+                        <p class="text-surface-gray leading-relaxed">Funciona perfeitamente no computador, tablet e celular. Acompanhe de onde estiver.</p>
+                    </article>
+
+                    <article class="bg-surface-muted rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll">
+                        <i data-lucide="refresh-cw" class="w-8 h-8 text-brand-600 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Atualizações constantes</h3>
+                        <p class="text-surface-gray leading-relaxed">Novas funcionalidades e melhorias com base no feedback real dos treinadores.</p>
+                    </article>
+
+                    <article class="bg-surface-muted rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-1">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-brand-600 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">Segurança dos dados</h3>
+                        <p class="text-surface-gray leading-relaxed">Criptografia, backups automáticos e conformidade com as melhores práticas de segurança.</p>
+                    </article>
+
+                    <article class="bg-surface-muted rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-2">
+                        <i data-lucide="cloud" class="w-8 h-8 text-brand-600 mb-4" aria-hidden="true"></i>
+                        <h3 class="text-lg font-bold text-surface-dark mb-2">100% em nuvem</h3>
+                        <p class="text-surface-gray leading-relaxed">Acesse de qualquer lugar, sem instalar nada. Seus dados sempre disponíveis e seguros.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <section id="planos" class="py-16 lg:py-24 bg-surface-muted" aria-labelledby="pricing-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center max-w-3xl mx-auto mb-14 animate-on-scroll">
+                    <h2 id="pricing-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Planos que acompanham o seu <mark class="text-brand-600 bg-transparent">crescimento</mark>
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Assim como a jornada de um corredor: base sólida, performance consistente e elite.
+                    </p>
+                </header>
+
+                <div class="grid lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto items-start">
+                    <article class="bg-white rounded-2xl p-8 card-lift animate-on-scroll">
+                        <header class="mb-6">
+                            <h3 class="text-xl font-bold text-surface-dark mb-1">Base</h3>
+                            <p class="text-sm text-surface-gray">Ideal para quem está começando</p>
+                        </header>
+                        <p class="mb-6">
+                            <strong class="text-4xl font-extrabold text-surface-dark">R$ 0</strong>
+                            <small class="text-surface-gray text-sm">/mês</small>
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Até <strong class="text-surface-dark">10 atletas</strong>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Cadastro de atletas e treinos
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Histórico de treinos
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Dashboard básico
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Cadastro de provas e resultados
+                            </li>
+                        </ul>
+                        <a href="#" class="btn-secondary w-full">Começar Gratuitamente</a>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-8 pricing-card-highlight card-lift animate-on-scroll animate-on-scroll-delay-1 lg:scale-105">
+                        <header class="flex items-center justify-between mb-6">
+                            <span>
+                                <h3 class="text-xl font-bold text-surface-dark mb-1">Performance</h3>
+                                <p class="text-sm text-surface-gray">Para assessorias em crescimento</p>
+                            </span>
+                            <span class="badge-popular">
+                                <i data-lucide="star" class="w-3.5 h-3.5 fill-current" aria-hidden="true"></i>
+                                Mais Popular
+                            </span>
+                        </header>
+                        <p class="mb-6">
+                            <strong class="text-4xl font-extrabold text-surface-dark">R$ 37,90</strong>
+                            <small class="text-surface-gray text-sm">/mês</small>
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Até <strong class="text-surface-dark">100 atletas</strong>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Dashboard completo
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Estatísticas de desempenho
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Relatórios de evolução
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Agenda de treinos
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Exportação de relatórios em PDF
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Backup automático
+                            </li>
+                        </ul>
+                        <a href="#" class="btn-primary w-full">Assinar Performance</a>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-8 card-lift animate-on-scroll animate-on-scroll-delay-2">
+                        <header class="mb-6">
+                            <h3 class="text-xl font-bold text-surface-dark mb-1">Elite</h3>
+                            <p class="text-sm text-surface-gray">Para assessorias consolidadas</p>
+                        </header>
+                        <p class="mb-6">
+                            <strong class="text-4xl font-extrabold text-surface-dark">R$ 47,90</strong>
+                            <small class="text-surface-gray text-sm">/mês</small>
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                <strong class="text-surface-dark">Atletas ilimitados</strong>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Múltiplos treinadores
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Dashboard analítico avançado
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Comparativo entre atletas
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Acesso antecipado (Beta)
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-surface-gray">
+                                <i data-lucide="check" class="w-5 h-5 text-success-DEFAULT flex-shrink-0 mt-0.5" aria-hidden="true"></i>
+                                Suporte prioritário
+                            </li>
+                        </ul>
+                        <a href="#" class="btn-secondary w-full">Assinar Elite</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPARISON TABLE -->
+        <section class="py-16 lg:py-24" aria-labelledby="compare-heading">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center mb-14 animate-on-scroll">
+                    <h2 id="compare-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Compare os planos
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Escolha o plano ideal para o tamanho da sua assessoria.
+                    </p>
+                </header>
+
+                <figure class="compare-table-wrap animate-on-scroll">
+                    <figcaption class="sr-only">Tabela comparativa dos planos Base, Performance e Elite</figcaption>
+                    <table class="compare-table w-full bg-white rounded-2xl border border-gray-100 overflow-hidden">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Recursos</th>
+                                <th>Base</th>
+                                <th class="text-brand-600">Performance</th>
+                                <th>Elite</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Atletas</td>
+                                <td>Até 10</td>
+                                <td class="font-semibold">Até 100</td>
+                                <td class="font-semibold">Ilimitados</td>
+                            </tr>
+                            <tr>
+                                <td>Cadastro de atletas e treinos</td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Dashboard</td>
+                                <td>Básico</td>
+                                <td class="font-semibold">Completo</td>
+                                <td class="font-semibold">Analítico avançado</td>
+                            </tr>
+                            <tr>
+                                <td>Estatísticas de desempenho</td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Relatórios de evolução</td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Agenda de treinos</td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Exportação em PDF</td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Múltiplos treinadores</td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Comparativo entre atletas</td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="minus" class="w-5 h-5 dash-icon inline" aria-label="Não incluído"></i></td>
+                                <td><i data-lucide="check" class="w-5 h-5 check-icon inline" aria-label="Incluído"></i></td>
+                            </tr>
+                            <tr>
+                                <td>Suporte</td>
+                                <td>Comunidade</td>
+                                <td>E-mail</td>
+                                <td class="font-semibold">Prioritário</td>
+                            </tr>
+                            <tr>
+                                <td>Preço</td>
+                                <td class="font-semibold">Grátis</td>
+                                <td class="font-semibold text-brand-600">R$ 37,90/mês</td>
+                                <td class="font-semibold">R$ 47,90/mês</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </figure>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS -->
+        <section id="depoimentos" class="py-16 lg:py-24 bg-surface-muted" aria-labelledby="testimonials-heading">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center max-w-3xl mx-auto mb-14 animate-on-scroll">
+                    <h2 id="testimonials-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Quem usa, <mark class="text-brand-600 bg-transparent">aprova</mark>
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Veja o que treinadores e assessorias estão dizendo sobre o Running Power.
+                    </p>
+                </header>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll">
+                        <p class="flex gap-1 mb-4" aria-label="5 de 5 estrelas">
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                        </p>
+                        <blockquote class="text-surface-gray leading-relaxed mb-6">
+                            <p>"Hoje consigo acompanhar todos os meus atletas sem depender de planilhas. O Running Power transformou a forma como eu gerencio meus treinos."</p>
+                        </blockquote>
+                        <address class="flex items-center gap-3 not-italic">
+                            <span class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center" aria-hidden="true">
+                                <span class="text-brand-600 font-bold text-sm">RM</span>
+                            </span>
+                            <span>
+                                <strong class="font-semibold text-surface-dark text-sm block">Rafael Moura</strong>
+                                <small class="text-xs text-surface-gray block">Treinador de corrida — São Paulo, SP</small>
+                            </span>
+                        </address>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-1">
+                        <p class="flex gap-1 mb-4" aria-label="5 de 5 estrelas">
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                        </p>
+                        <blockquote class="text-surface-gray leading-relaxed mb-6">
+                            <p>"Economizo várias horas por semana. O que eu fazia em 3 planilhas diferentes, agora faço em minutos no Running Power."</p>
+                        </blockquote>
+                        <address class="flex items-center gap-3 not-italic">
+                            <span class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center" aria-hidden="true">
+                                <span class="text-brand-600 font-bold text-sm">AC</span>
+                            </span>
+                            <span>
+                                <strong class="font-semibold text-surface-dark text-sm block">Ana Costa</strong>
+                                <small class="text-xs text-surface-gray block">Personal Trainer — Curitiba, PR</small>
+                            </span>
+                        </address>
+                    </article>
+
+                    <article class="bg-white rounded-2xl p-6 sm:p-8 card-lift animate-on-scroll animate-on-scroll-delay-2">
+                        <p class="flex gap-1 mb-4" aria-label="5 de 5 estrelas">
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                            <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-yellow-400" aria-hidden="true"></i>
+                        </p>
+                        <blockquote class="text-surface-gray leading-relaxed mb-6">
+                            <p>"Minha assessoria ficou muito mais organizada. Consigo ver a evolução de cada atleta em um só lugar. Recomendo para todo treinador."</p>
+                        </blockquote>
+                        <address class="flex items-center gap-3 not-italic">
+                            <span class="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center" aria-hidden="true">
+                                <span class="text-brand-600 font-bold text-sm">PL</span>
+                            </span>
+                            <span>
+                                <strong class="font-semibold text-surface-dark text-sm block">Pedro Lima</strong>
+                                <small class="text-xs text-surface-gray block">Coach Esportivo — Rio de Janeiro, RJ</small>
+                            </span>
+                        </address>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-16 lg:py-24" aria-labelledby="faq-heading">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <header class="text-center mb-14 animate-on-scroll">
+                    <h2 id="faq-heading" class="text-3xl sm:text-4xl font-extrabold tracking-tight text-surface-dark mb-4">
+                        Perguntas <mark class="text-brand-600 bg-transparent">frequentes</mark>
+                    </h2>
+                    <p class="text-lg text-surface-gray leading-relaxed">
+                        Tire suas dúvidas antes de começar.
+                    </p>
+                </header>
+
+                <dl id="list-faqs" class="animate-on-scroll">
+                    <!--
+                    <faq-item>
+                        <dt>
+                            <button class="faq-question" aria-expanded="false">
+                                <span>Posso cancelar quando quiser?</span>
+                                <i data-lucide="plus" class="w-5 h-5 faq-icon text-surface-gray" aria-hidden="true"></i>
+                            </button>
+                        </dt>
+                        <dd class="faq-answer">
+                            <p>Sim! Você pode cancelar sua assinatura a qualquer momento, sem multas ou taxas extras. Seu acesso permanece ativo até o final do período já pago.</p>
+                        </dd>
+                    </faq-item>
+
+                    <faq-item>
+                        <dt>
+                            <button class="faq-question" aria-expanded="false">
+                                <span>Existe fidelidade?</span>
+                                <i data-lucide="plus" class="w-5 h-5 faq-icon text-surface-gray" aria-hidden="true"></i>
+                            </button>
+                        </dt>
+                        <dd class="faq-answer">
+                            <p>Não. Todos os planos são de assinatura mensal, sem contrato de fidelidade. Você tem total liberdade para entrar e sair quando quiser.</p>
+                        </dd>
+                    </faq-item>
+
+                    <faq-item>
+                        <dt>
+                            <button class="faq-question" aria-expanded="false">
+                                <span>Posso trocar de plano depois?</span>
+                                <i data-lucide="plus" class="w-5 h-5 faq-icon text-surface-gray" aria-hidden="true"></i>
+                            </button>
+                        </dt>
+                        <dd class="faq-answer">
+                            <p>Com certeza. Você pode fazer upgrade ou downgrade do seu plano a qualquer momento. Ao fazer upgrade, você libera os novos recursos na hora. No downgrade, a mudança vale a partir do próximo ciclo.</p>
+                        </dd>
+                    </faq-item>
+
+                    <faq-item>
+                        <dt>
+                            <button class="faq-question" aria-expanded="false">
+                                <span>Funciona no celular?</span>
+                                <i data-lucide="plus" class="w-5 h-5 faq-icon text-surface-gray" aria-hidden="true"></i>
+                            </button>
+                        </dt>
+                        <dd class="faq-answer">
+                            <p>Sim. O Running Power é totalmente responsivo e funciona perfeitamente em computadores, tablets e smartphones. Acesse de qualquer lugar, a qualquer hora.</p>
+                        </dd>
+                    </faq-item>
+
+                    <faq-item>
+                        <dt>
+                            <button class="faq-question" aria-expanded="false">
+                                <span>Meus dados ficam seguros?</span>
+                                <i data-lucide="plus" class="w-5 h-5 faq-icon text-surface-gray" aria-hidden="true"></i>
+                            </button>
+                        </dt>
+                        <dd class="faq-answer">
+                            <p>Sim. Utilizamos criptografia de ponta a ponta, backups automáticos diários e seguimos as melhores práticas de segurança. Seus dados e os dados dos seus atletas estão protegidos.</p>
+                        </dd>
+                    </faq-item>
+
+                    <faq-item>
+                        <dt>
+                            <button class="faq-question" aria-expanded="false">
+                                <span>Preciso instalar algum programa?</span>
+                                <i data-lucide="plus" class="w-5 h-5 faq-icon text-surface-gray" aria-hidden="true"></i>
+                            </button>
+                        </dt>
+                        <dd class="faq-answer">
+                            <p>Não. O Running Power é 100% baseado em nuvem. Basta acessar pelo seu navegador, fazer login e começar a usar. Nada de instalações complicadas.</p>
+                        </dd>
+                    </faq-item>
+
+                    <faq-item>
+                        <dt>
+                            <button class="faq-question" aria-expanded="false">
+                                <span>Tem suporte para tirar dúvidas?</span>
+                                <i data-lucide="plus" class="w-5 h-5 faq-icon text-surface-gray" aria-hidden="true"></i>
+                            </button>
+                        </dt>
+                        <dd class="faq-answer">
+                            <p>Sim. O plano Base conta com suporte pela comunidade. Os planos Performance e Elite contam com suporte por e-mail e suporte prioritário, respectivamente.</p>
+                        </dd>
+                    </faq-item>
+                    -->
+                </dl>
+            </div>
+        </section>
+
+        <!-- FINAL CTA -->
+        <section class="py-16 lg:py-24 bg-surface-dark" aria-labelledby="final-cta-heading">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <header class="animate-on-scroll">
+                    <h2 id="final-cta-heading" class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white mb-4">
+                        Sua assessoria merece uma plataforma à altura do seu trabalho.
+                    </h2>
+                    <p class="text-lg sm:text-xl text-gray-400 leading-relaxed mb-10 max-w-2xl mx-auto">
+                        Comece gratuitamente hoje mesmo e descubra como o Running Power pode transformar a gestão da sua assessoria.
+                    </p>
+                    <p class="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="#planos" class="btn-primary text-lg px-10 py-4">
+                            Criar minha conta
+                            <i data-lucide="arrow-right" class="w-5 h-5" aria-hidden="true"></i>
+                        </a>
+                        <a href="#funcionalidades" class="inline-flex items-center justify-center gap-2 px-10 py-4 border-2 border-gray-700 text-gray-300 font-semibold text-lg rounded-lg hover:border-gray-500 hover:text-white transition-all duration-250 no-underline">
+                            <i data-lucide="play" class="w-5 h-5" aria-hidden="true"></i>
+                            Ver demonstração
+                        </a>
+                    </p>
+                    <small class="text-gray-500 text-sm mt-6 block">Sem compromisso. Cancele quando quiser.</small>
+                </header>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-surface-dark border-t border-gray-800" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+                <section class="sm:col-span-2 lg:col-span-1" aria-label="Sobre o Running Power">
+                    <a href="#" class="flex items-center gap-2.5 font-extrabold text-xl text-white no-underline mb-4">
+                        <i data-lucide="zap" class="w-6 h-6 text-brand-600" aria-hidden="true"></i>
+                        <span>Running<span class="text-brand-600">Power</span></span>
+                    </a>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        Plataforma completa para gestão de assessorias de corrida. Organize atletas, treinos e provas em um só lugar.
+                    </p>
+                    <p class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all duration-250" aria-label="Instagram">
+                            <i data-lucide="camera" class="w-4 h-4" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all duration-250" aria-label="YouTube">
+                            <i data-lucide="video" class="w-4 h-4" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all duration-250" aria-label="LinkedIn">
+                            <i data-lucide="briefcase" class="w-4 h-4" aria-hidden="true"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-lg bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-brand-600 hover:text-white transition-all duration-250" aria-label="Strava">
+                            <i data-lucide="activity" class="w-4 h-4" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </section>
+
+                <nav aria-label="Links do produto">
+                    <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Produto</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#funcionalidades" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Funcionalidades</a></li>
+                        <li><a href="#planos" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Planos</a></li>
+                        <li><a href="#depoimentos" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Depoimentos</a></li>
+                        <li><a href="#faq" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <nav aria-label="Links da empresa">
+                    <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Empresa</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Sobre nós</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Blog</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Contato</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Carreiras</a></li>
+                    </ul>
+                </nav>
+
+                <nav aria-label="Links legais">
+                    <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Legal</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Política de Privacidade</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">Termos de Uso</a></li>
+                        <li><a href="#" class="text-sm text-gray-400 hover:text-white transition-colors no-underline">LGPD</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <hr class="mt-12 border-t border-gray-800">
+
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <small class="text-sm text-gray-500">
+                    &copy; <time datetime="2026">2026</time> Running Power. Todos os direitos reservados.
+                </small>
+                <small class="text-sm text-gray-500">
+                    Feito com <i data-lucide="heart" class="w-3.5 h-3.5 inline text-brand-600 fill-brand-600" aria-hidden="true"></i> para assessorias de corrida.
+                </small>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Scripts -->
+    <script src="views/assets/public/scripts/scripts.js"></script>
+    <script src="views/assets/public/scripts/faqs.js" async></script>
+
+    <!-- Initialize Lucide Icons -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 </body>
 </html>
