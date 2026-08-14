@@ -116,7 +116,7 @@ function initFAQ() {
     answer.classList.toggle("open", !expanded);
   });
 
-  fetchFAQs();
+  //fetchFAQs();
 
 }
 
